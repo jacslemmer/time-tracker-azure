@@ -3,7 +3,13 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(npm create:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: Complete Time Tracker Azure web application with functional programming\n\n- Backend with functional TypeScript using fp-ts\n- Pure domain logic with Result types (Either/TaskEither)\n- Frontend with React and functional components\n- PostgreSQL/Supabase database schema\n- Docker containerization for backend and frontend\n- Azure deployment configuration\n- Jest tests for critical business logic\n\nFeatures:\n- Project management with budget tracking\n- Timer-based and manual time entry\n- Comprehensive reporting (All, By Client, By Project)\n- Budget alerts and long-running session warnings\n- CSV/JSON export capabilities\n- User authentication with JWT\n- Responsive web design\n\nArchitecture follows strict functional principles:\n- Pure functions for all business logic\n- Immutable data structures (readonly types)\n- Functional composition with fp-ts pipe/flow\n- No classes, only functions and data\n- TaskEither for async error handling\n- Pragmatic TDD with tests for critical paths\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(gh repo create:*)",
+      "Read(//Users/jacobuslemmer/Desktop/**)",
+      "Read(//Users/jacobuslemmer/Library/**)",
+      "Read(//Users/jacobuslemmer/Documents/**)"
     ],
     "deny": [],
     "ask": []

@@ -6,16 +6,16 @@ metadata:
 services:
   backend:
     project: ./backend
-    language: ts
-    host: containerapp
-    docker:
-      path: ./backend/Dockerfile
-      context: ./backend
+    language: js
+    host: appservice
+    config:
+      runtime: node
+      version: "18"
+      startupCommand: "npm start"
 
   frontend:
     project: ./frontend
-    language: ts
+    language: js
     host: staticwebapp
-    docker:
-      path: ./frontend/Dockerfile
-      context: ./frontend
+    config:
+      outputPath: dist
