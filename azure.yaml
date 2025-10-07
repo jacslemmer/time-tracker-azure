@@ -1,0 +1,21 @@
+# Azure Developer CLI configuration for Time Tracker
+name: time-tracker-azure
+metadata:
+  template: time-tracker-azure@0.0.1
+
+services:
+  backend:
+    project: ./backend
+    language: ts
+    host: containerapp
+    docker:
+      path: ./backend/Dockerfile
+      context: ./backend
+
+  frontend:
+    project: ./frontend
+    language: ts
+    host: staticwebapp
+    docker:
+      path: ./frontend/Dockerfile
+      context: ./frontend
