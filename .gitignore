@@ -43,3 +43,9 @@ Thumbs.db
 
 # Misc
 *.local
+
+# Azure Functions
+api/dist/
+api/node_modules/
+api/local.settings.json
+api/.funcignore

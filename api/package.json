@@ -1,0 +1,26 @@
+{
+  "name": "time-tracker-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for Time Tracker",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "func start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@azure/cosmos": "^4.0.0",
+    "@azure/functions": "^4.0.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "fp-ts": "^2.16.1",
+    "io-ts": "^2.2.20"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.3",
+    "azure-functions-core-tools": "^4.0.0"
+  }
+}
