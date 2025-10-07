@@ -1,4 +1,5 @@
 import * as E from 'fp-ts/Either';
+import { pipe } from 'fp-ts/function';
 import { Result, validationError } from '../utils/Result';
 import { hoursToSeconds } from './time';
 
@@ -27,7 +28,10 @@ export const validateHours = (hours: number): Result<any, number> =>
 export const validateManualEntry = (
   data: CreateManualEntryData
 ): Result<any, CreateManualEntryData> =>
-  validateHours(data.hours).pipe(E.map(() => data));
+  pipe(
+    validateHours(data.hours),
+    E.map(() => data)
+  );
 
 // Pure business logic
 export const createManualEntry = (

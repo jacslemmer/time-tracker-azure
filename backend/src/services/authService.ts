@@ -41,7 +41,7 @@ const validatePassword = (password: string): E.Either<any, string> =>
 
 // Pure function to generate JWT
 const generateToken = (user: User, secret: string, expiresIn: string): string =>
-  jwt.sign({ id: user.id, email: user.email }, secret, { expiresIn });
+  jwt.sign({ id: user.id, email: user.email }, secret, { expiresIn } as jwt.SignOptions);
 
 // Hash password
 const hashPassword = (password: string): AsyncResult<any, string> =>
