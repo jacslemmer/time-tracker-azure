@@ -9,7 +9,20 @@
       "Bash(gh repo create:*)",
       "Read(//Users/jacobuslemmer/Desktop/**)",
       "Read(//Users/jacobuslemmer/Library/**)",
-      "Read(//Users/jacobuslemmer/Documents/**)"
+      "Read(//Users/jacobuslemmer/Documents/**)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfix: Azure deployment compliance - all Category A requirements met\n\nFixed all issues from azure-readiness-report2.csv:\n\n✅ azure.yaml configuration:\n- Changed host from ''containerapp'' to ''appservice''\n- Added proper runtime config (Node 18)\n- Added startupCommand: ''npm start''\n- Fixed frontend staticwebapp config\n\n✅ Azure Storage SDK:\n- Added @azure/storage-blob@^12.17.0 to dependencies\n\n✅ Environment variables:\n- Updated .env.example with Azure-specific vars\n- Added AZURE_STORAGE_CONNECTION_STRING\n- Added AZURE_STORAGE_CONTAINER_NAME\n- Added LOG_CONSOLE=true, LOG_FILE=false\n- Changed PORT from 3000 to 3001\n\n✅ Docker configuration:\n- Fixed port from 3000 to 3001 throughout\n- Updated health checks to use port 3001\n- Updated docker-compose.yml\n\n✅ Logging configuration:\n- Created Azure-compatible logger (console only)\n- No file logging (ephemeral filesystem)\n- Environment variable controlled\n- Warns if file logging enabled\n\n✅ Compliance documentation:\n- Created AZURE-COMPLIANCE.md\n- Tracks all Category A/B/C requirements\n- Pre-deployment checklist included\n\n✅ Verification:\n- No persistent file storage (checked)\n- No winston file transports\n- All checklist items from deployment guide addressed\n\nCompliant with:\n~/Documents/platform-documentation/azure/01-AZURE-DEPLOYMENT-COMPLETE-GUIDE.md\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(cat:*)",
+      "Bash(git commit:*)",
+      "Bash(curl:*)",
+      "Read(//Users/jacobuslemmer/**)",
+      "Bash(git log:*)",
+      "Bash(npm run deploy:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx wrangler pages deploy:*)",
+      "Bash(find:*)",
+      "Bash(npm install)",
+      "Bash(az:*)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []
