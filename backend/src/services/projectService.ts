@@ -106,11 +106,24 @@ export const stopProjectTimer =
   ): AsyncResult<any, { project: Project; elapsed: number }> =>
     pipe(
       ProjectRepo.findById(pool)(id, userId),
-      TE.chain((project) =>
-        project.is_running && project.start_time
-          ? TE.right(project)
-          : TE.left(validationError('Timer is not running'))
-      ),
+      TE.chain((project) => {
+        // Convert start_time to number if it's a string (from PostgreSQL)
+        const startTime = typeof project.start_time === 'string'
+          ? parseInt(project.start_time, 10)
+          : project.start_time;
+
+        // Check if timer is actually running
+        if (!project.is_running || !startTime) {
+          console.error('Timer stop validation failed:', {
+            is_running: project.is_running,
+            start_time: project.start_time,
+            start_time_type: typeof project.start_time
+          });
+          return TE.left(validationError('Timer is not running'));
+        }
+
+        return TE.right({ ...project, start_time: startTime });
+      }),
       TE.chain((project) => {
         const elapsed = calculateElapsed(project.start_time!, Date.now());
         return pipe(
