@@ -49,7 +49,8 @@ export const ProjectCard = ({
   };
 
   const totalHours = currentSeconds / 3600;
-  const billing = totalHours * project.hourly_rate;
+  const hourlyRate = typeof project.hourly_rate === 'string' ? parseFloat(project.hourly_rate) : project.hourly_rate;
+  const billing = totalHours * hourlyRate;
   const budgetStatus = getBudgetStatus(billing, project.budget);
 
   return (

@@ -9,12 +9,14 @@ export const formatHours = (seconds: number): string => {
   return (seconds / 3600).toFixed(2);
 };
 
-export const formatCurrency = (amount: number): string => {
-  return `R ${amount.toFixed(2)}`;
+export const formatCurrency = (amount: number | string): string => {
+  const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
+  return `R ${numAmount.toFixed(2)}`;
 };
 
-export const getBudgetStatus = (billing: number, budget: number): 'normal' | 'warning' | 'danger' => {
-  const percentage = (billing / budget) * 100;
+export const getBudgetStatus = (billing: number, budget: number | string): 'normal' | 'warning' | 'danger' => {
+  const numBudget = typeof budget === 'string' ? parseFloat(budget) : budget;
+  const percentage = (billing / numBudget) * 100;
   if (percentage >= 100) return 'danger';
   if (percentage >= 80) return 'warning';
   return 'normal';

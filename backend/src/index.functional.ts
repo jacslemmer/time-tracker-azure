@@ -17,8 +17,17 @@ dotenv.config();
 // Pure configuration functions
 const getPort = (): number => parseInt(process.env.PORT || '3000', 10);
 
-const getCorsOrigin = (): string =>
-  process.env.CORS_ORIGIN || 'http://localhost:5173';
+const getCorsOrigin = (): string | string[] => {
+  const envOrigin = process.env.CORS_ORIGIN;
+  if (envOrigin) {
+    return envOrigin.includes(',') ? envOrigin.split(',').map(o => o.trim()) : envOrigin;
+  }
+  // Default allowed origins
+  return [
+    'http://localhost:5173',
+    'https://delightful-water-0995f8b0f.1.azurestaticapps.net'
+  ];
+};
 
 // Application factory function
 const createApp = () => {
