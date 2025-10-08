@@ -30,7 +30,7 @@ jobs:
           api_location: "/api"
           output_location: "dist"
         env:
-          VITE_API_URL: "http://time-tracker-app.eastus.azurecontainer.io:3001/api"
+          VITE_API_URL: "https://time-tracker-app.eastus.azurecontainer.io:3001/api"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
