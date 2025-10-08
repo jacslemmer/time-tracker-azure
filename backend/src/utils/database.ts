@@ -9,7 +9,8 @@ export type DbConnection = Pool;
 export const createDbPool = (connectionString: string): DbConnection =>
   new Pool({
     connectionString,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
+    // SSL disabled for containerized PostgreSQL
+    ssl: false,
   });
 
 // Execute query as AsyncResult

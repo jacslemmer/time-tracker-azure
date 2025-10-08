@@ -6,9 +6,11 @@ import { errorHandler } from './middleware/errorHandler';
 import { initializeDatabase } from './config/database.functional';
 import { createProjectRouter } from './routes/projects.functional';
 import { createTimeEntryRouter } from './routes/timeEntries.functional';
-import { createAuthRouter } from './routes/auth.functional';
+import { createAuthRouter } from './routes/auth.simple';
 import { createWarningRouter } from './routes/warnings.functional';
 import reportRoutes from './routes/reports';
+import { createInitRouter } from './routes/init';
+import { createDebugRouter } from './routes/debug';
 
 dotenv.config();
 
@@ -38,6 +40,8 @@ const createApp = () => {
   });
 
   // Routes
+  app.use('/api', createInitRouter(pool));
+  app.use('/api', createDebugRouter(pool));
   app.use('/api/auth', createAuthRouter(pool));
   app.use('/api/projects', authenticate, createProjectRouter(pool));
   app.use('/api/time-entries', authenticate, createTimeEntryRouter(pool));

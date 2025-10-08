@@ -22,7 +22,17 @@
       "Bash(find:*)",
       "Bash(npm install)",
       "Bash(az:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "WebSearch",
+      "Bash(docker build:*)",
+      "Bash(tee:*)",
+      "Bash(PGPASSWORD='TimeTrack2025!Secure' psql -h time-tracker-app.eastus.azurecontainer.io -p 5432 -U pgadmin -d timetracker -f /Users/jacobuslemmer/git/time-tracker-azure/database/schema.sql)",
+      "Bash(psql:*)",
+      "Bash(node:*)",
+      "Bash(/dev/null)",
+      "Bash(EMAIL=\"testlogin@example.com\")",
+      "Bash(PASSWORD=\"TestLogin123!\")",
+      "Bash(git reset:*)"
     ],
     "deny": [],
     "ask": []

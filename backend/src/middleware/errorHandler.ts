@@ -7,10 +7,13 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   console.error('❌ Error:', err.message);
-  console.error(err.stack);
+  console.error('❌ Stack:', err.stack);
+  console.error('❌ Request path:', req.path);
+  console.error('❌ Request method:', req.method);
 
   res.status(500).json({
     error: 'Internal server error',
-    message: process.env.NODE_ENV === 'development' ? err.message : undefined,
+    details: err.message,
+    path: req.path
   });
 };

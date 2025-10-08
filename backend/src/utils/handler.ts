@@ -38,17 +38,23 @@ export const makeHandlerWithStatus =
     successStatus: number = 200
   ) =>
   async (req: Request, res: Response): Promise<void> => {
-    const result = await fn(req)();
+    try {
+      const result = await fn(req)();
 
-    pipe(
-      result,
-      (either) => {
-        if (either._tag === 'Left') {
-          const error = either.left;
-          res.status(error.statusCode).json({ error: error.message });
-        } else {
-          res.status(successStatus).json(either.right);
+      pipe(
+        result,
+        (either) => {
+          if (either._tag === 'Left') {
+            const error = either.left;
+            console.error('Handler error:', error);
+            res.status(error.statusCode).json({ error: error.message });
+          } else {
+            res.status(successStatus).json(either.right);
+          }
         }
-      }
-    );
+      );
+    } catch (error) {
+      console.error('Uncaught error in handler:', error);
+      res.status(500).json({ error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown' });
+    }
   };

@@ -1,0 +1,70 @@
+apiVersion: '2021-09-01'
+location: eastus
+name: time-tracker-app
+properties:
+  containers:
+  - name: postgres
+    properties:
+      image: timetrackerregistry.azurecr.io/postgres:14-alpine
+      resources:
+        requests:
+          cpu: 0.5
+          memoryInGb: 1.0
+      ports:
+      - port: 5432
+        protocol: TCP
+      environmentVariables:
+      - name: POSTGRES_DB
+        value: timetracker
+      - name: POSTGRES_USER
+        value: pgadmin
+      - name: POSTGRES_PASSWORD
+        secureValue: YOUR_DB_PASSWORD_HERE
+      volumeMounts:
+      - name: postgres-data
+        mountPath: /var/lib/postgresql/data
+
+  - name: backend
+    properties:
+      image: timetrackerregistry.azurecr.io/time-tracker-backend:latest
+      resources:
+        requests:
+          cpu: 0.5
+          memoryInGb: 1.0
+      ports:
+      - port: 3001
+        protocol: TCP
+      environmentVariables:
+      - name: NODE_ENV
+        value: production
+      - name: PORT
+        value: '3001'
+      - name: DATABASE_URL
+        value: postgresql://pgadmin:YOUR_DB_PASSWORD_HERE@localhost:5432/timetracker
+      - name: JWT_SECRET
+        secureValue: YOUR_JWT_SECRET_HERE
+      - name: JWT_EXPIRES_IN
+        value: 7d
+      - name: CORS_ORIGIN
+        value: https://YOUR_STATIC_WEB_APP_URL_HERE
+
+  imageRegistryCredentials:
+  - server: timetrackerregistry.azurecr.io
+    username: YOUR_REGISTRY_USERNAME
+    password: YOUR_REGISTRY_PASSWORD
+
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: TCP
+      port: 3001
+    dnsNameLabel: time-tracker-app
+
+  osType: Linux
+
+  volumes:
+  - name: postgres-data
+    emptyDir: {}
+
+tags: {}
+type: Microsoft.ContainerInstance/containerGroups
